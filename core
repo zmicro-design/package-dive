@@ -18,19 +18,26 @@ install() {
   # prepare context
   cd $tmp_dir
 
-  if [ "$(os::is_macos)" != "true" ] && [ "$arch" = "arm64" ]; then
-    log::error "[$(timestamp)] unsupport linux arm64"
-    return 1
-  fi
-
   case $platform in
-    darwin)
-      case $arch in
-        arm64)
-          log::error "[$(timestamp)] $platform unsupport arch: $arch"
-          return 1
-          ;;
-      esac
+  darwin)
+    case $arch in
+    arm64)
+      log::error "[$(timestamp)] $platform unsupport arch: $arch"
+      return 1
+      ;;
+    esac
+    ;;
+  linux)
+    case $arch in
+    arm64)
+      log::error "[$(timestamp)] $platform unsupport arch: $arch"
+      return 1
+      ;;
+    esac
+    ;;
+  *)
+    log::error "[$(timestamp)] unsupport platform: $platform"
+    return 1
     ;;
   esac
 
