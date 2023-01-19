@@ -23,6 +23,17 @@ install() {
     return 1
   fi
 
+  case $platform in
+    darwin)
+      case $arch in
+        arm64)
+          log::error "[$(timestamp)] $platform unsupport arch: $arch"
+          return 1
+          ;;
+      esac
+    ;;
+  esac
+
   # reference: https://github.com/wagoodman/dive/releases
   # example:
   #   -
