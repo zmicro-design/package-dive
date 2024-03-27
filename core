@@ -21,7 +21,8 @@ install() {
   case $platform in
   darwin)
     case $arch in
-    arm64)
+    arm64 | amd64) ;;
+    *)
       log::error "[$(timestamp)] $platform unsupport arch: $arch"
       return 1
       ;;
@@ -29,7 +30,8 @@ install() {
     ;;
   linux)
     case $arch in
-    arm64)
+    arm64 | amd64) ;;
+    *)
       log::error "[$(timestamp)] $platform unsupport arch: $arch"
       return 1
       ;;
@@ -44,7 +46,10 @@ install() {
   # reference: https://github.com/wagoodman/dive/releases
   # example:
   #   -
-  #   https://github.com/wagoodman/dive/releases/download/v0.10.0/dive_0.10.0_darwin_amd64.tar.gz
+  #   https://github.com/wagoodman/dive/releases/download/v0.12.0/dive_0.12.0_darwin_amd64.tar.gz
+  #   https://github.com/wagoodman/dive/releases/download/v0.12.0/dive_0.12.0_darwin_arm64.tar.gz
+  #   https://github.com/wagoodman/dive/releases/download/v0.12.0/dive_0.12.0_linux_amd64.tar.gz
+  #   https://github.com/wagoodman/dive/releases/download/v0.12.0/dive_0.12.0_linux_arm64.tar.gz
   # generate url
   local url="https://github.com/wagoodman/dive/releases/download/$PACKAGE_CORE_VERSION/${name}_${PACKAGE_CORE_VERSION#v}_${platform}_${arch}.tar.gz"
   log::debug "[package][$name][$kernel][$arch] url: $url"
